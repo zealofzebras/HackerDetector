@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29020.237
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HackerDetector.Functions", "HackerDetector.Functions\HackerDetector.Functions.csproj", "{28F6A53B-5503-43F0-80DF-F532E070C20E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HackerDetector.AspNetCore", "HackerDetector.AspNetCore\HackerDetector.AspNetCore.csproj", "{DF2A473E-E91D-4FE2-B14E-55473B6E573D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HackerDetector.Blockers.Cloudflare", "HackerDetector.Blockers.Cloudflare\HackerDetector.Blockers.Cloudflare.csproj", "{8081B718-AFF6-489E-910D-4FD55D78621A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{28F6A53B-5503-43F0-80DF-F532E070C20E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{28F6A53B-5503-43F0-80DF-F532E070C20E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{28F6A53B-5503-43F0-80DF-F532E070C20E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{28F6A53B-5503-43F0-80DF-F532E070C20E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DF2A473E-E91D-4FE2-B14E-55473B6E573D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DF2A473E-E91D-4FE2-B14E-55473B6E573D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DF2A473E-E91D-4FE2-B14E-55473B6E573D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DF2A473E-E91D-4FE2-B14E-55473B6E573D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8081B718-AFF6-489E-910D-4FD55D78621A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8081B718-AFF6-489E-910D-4FD55D78621A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8081B718-AFF6-489E-910D-4FD55D78621A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8081B718-AFF6-489E-910D-4FD55D78621A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F3F62FAF-1548-4E2B-A5C4-A61EC162C372}
+	EndGlobalSection
+EndGlobal
