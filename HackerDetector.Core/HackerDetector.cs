@@ -19,6 +19,7 @@ namespace HackerDetector
         private readonly Dictionary<IPAddress, Collections.FixedSizedQueue<DateTime>> hammerCache = new Dictionary<IPAddress, Collections.FixedSizedQueue<DateTime>>();
 
         private readonly HackerDetectorOptions _options;
+        public HackerDetectorOptions Options { get => _options; }
 
         public HackerDetector(ILoggerFactory loggerFactory, HackerDetectorOptions options)
         {

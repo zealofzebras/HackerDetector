@@ -28,5 +28,11 @@ namespace HackerDetector
         public bool HammerCheckAllPaths { get; set; }
 
         public int HammerMaxHitsInASecond { get; set; } = 4;
+
+        /// <summary>
+        /// Very useful if there in the pipeline is a error reporting tool (like elmah.io) that should ignore these failed/blocked requests. 
+        /// Set to true to stop the pipeline and return a response.
+        /// </summary>
+        public bool ReturnBlockedResponse { get; set; } = false;
     }
 }

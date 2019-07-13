@@ -1,8 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 
@@ -44,13 +41,12 @@ namespace HackerDetector.AspNetCore
                 else
                 {
                     _logger.LogInformation(string.Format("Blocked: {0} for accessing {1}", originIP.ToString(), path));
-
-                    // context.Response.StatusCode = (int)HttpStatusCode.NotAcceptable;
-                    //  await context.Response.WriteAsync(Enum.GetName(typeof(Hacker.Result), result));
+                    if (!_hackerDetector.Options.ReturnBlockedResponse)
+                    {
+                        context.Response.StatusCode = (int)HttpStatusCode.NotAcceptable;
+                        await context.Response.WriteAsync("blocked");
+                    }
                 }
-
-                //watch.Stop();
-                //Debug("Finished: " + path + " " + watch.ElapsedMilliseconds);
             }
             else
             {
