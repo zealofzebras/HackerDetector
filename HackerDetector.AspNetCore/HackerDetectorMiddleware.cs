@@ -45,7 +45,7 @@ namespace HackerDetector.AspNetCore
                 else
                 {
                     _logger.LogInformation(string.Format("Blocked: {0} for accessing {1}", originIP.ToString(), path));
-                    if (!_hackerDetector.Options.ReturnBlockedResponseWhenBlocked)
+                    if (_hackerDetector.Options.ReturnBlockedResponseWhenBlocked)
                     {
                         context.Response.StatusCode = (int)HttpStatusCode.NotAcceptable;
                         await context.Response.WriteAsync("blocked");

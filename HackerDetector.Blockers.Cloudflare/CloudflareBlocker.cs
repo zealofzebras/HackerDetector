@@ -27,7 +27,7 @@ namespace HackerDetector.Blockers.Cloudflare
             var path = $"/client/v4/zones/{_options.ZoneId}/firewall/access_rules/rules";
             var body = new
             {
-                mode = _options.BlockAction.ToString().ToUnderscoreCase(), 
+                mode = _options.BlockAction.ToString().ToUnderscoreCase(),
                 configuration = new
                 {
                     target = "ip",
@@ -45,16 +45,24 @@ namespace HackerDetector.Blockers.Cloudflare
                 client.DefaultRequestHeaders.Add("X-Auth-Key", _options.AuthKey);
 
                 var success = await client.PostAsJsonAsync(path, body);
-                try
+                var content = await success.Content.ReadAsStringAsync();
+
+                // Ignore duplication of rules
+                if (!content.Contains("firewallaccessrules.api.duplicate_of_existing"))
                 {
-                    success.EnsureSuccessStatusCode();
-                }
-                catch (HttpRequestException exception) 
-                {
-                    // Should this throw a new exception? I don't know what the best option is.
-                    exception.Data.Add("Content", await success.Content.ReadAsStringAsync());
-                    exception.Data.Add("ReasonPhrase", success.ReasonPhrase);
-                    throw;
+                    try
+                    {
+                        success.EnsureSuccessStatusCode();
+                    }
+                    catch (HttpRequestException exception)
+                    {
+                        // Should this throw a new exception? I don't know what the best option is.
+                        exception.Data.Add("AuthEmail", _options.AuthEmail);
+                        exception.Data.Add("ZoneId", _options.ZoneId);
+                        exception.Data.Add("Content", content);
+                        exception.Data.Add("ReasonPhrase", success.ReasonPhrase);
+                        throw;
+                    }
                 }
             }
         }

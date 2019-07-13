@@ -3,6 +3,10 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <RootNamespace>HackerDetector</RootNamespace>
+    <PackageId>Sustainable.Web.HackerDetector.Core</PackageId>
+    <Company>zeal aps</Company>
+    <Authors>zeal aps</Authors>
+    <Copyright>zeal aps</Copyright>
   </PropertyGroup>
 
   <ItemGroup>
