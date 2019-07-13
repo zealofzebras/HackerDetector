@@ -43,21 +43,21 @@ namespace HackerDetector
         }
 
 
-        public async Task<bool> DetectAndBlockAsync(string path, IPAddress originIP)
+        public async Task<DetectResultEnum> DetectAndBlockAsync(string path, IPAddress originIP)
         {
             var block = Detect(path, originIP);
 
-            if (block)
+            if (block.HasFlag(DetectResultEnum.Blocked))
                 await BlockAsync(originIP);
 
             return block;
         }
 
-        public bool DetectAndBlock(string path, IPAddress originIP)
+        public DetectResultEnum DetectAndBlock(string path, IPAddress originIP)
         {
             var block = Detect(path, originIP);
 
-            if (block)
+            if (block.HasFlag(DetectResultEnum.Blocked))
                 Block(originIP);
 
             return block;
@@ -68,20 +68,21 @@ namespace HackerDetector
         public Task BlockAsync(IPAddress originIP) => blockQueue.AddMessageAsync(new CloudQueueMessage(originIP.ToString()));
 
 
-        public bool Detect(string path, IPAddress originIP)
+        public DetectResultEnum Detect(string path, IPAddress originIP)
         {
-
+            var result = DetectResultEnum.Clean;
             if ((_options.Traps?.Contains(path)).GetValueOrDefault())
             {
                 if (_options.TrapHitsToBlock == 1)
-                    return true;
+                    return DetectResultEnum.FellInTrapAndBlocked;
                 else if (accessCache.TryGetValue(originIP, out var cached))
                     if (cached >= _options.TrapHitsToBlock)
-                        return true;
+                        return DetectResultEnum.FellInTrapAndBlocked;
                     else
                         accessCache[originIP] = cached + 1;
                 else
                     accessCache.Add(originIP, 1);
+                result = result | DetectResultEnum.FellInTrap;
             }
 
             if (_options.HammerCheckAllPaths || (_options.HammerPaths?.Contains(path)).GetValueOrDefault())
@@ -92,7 +93,7 @@ namespace HackerDetector
                 cached.Enqueue(DateTime.Now);
 
                 if ((cached.First() - cached.Last()).TotalSeconds < 1)
-                    return true;
+                    return DetectResultEnum.HammeredPathAndBlocked;
             }
 
 
@@ -102,7 +103,7 @@ namespace HackerDetector
 
             // 
 
-            return false;
+            return result;
         }
 
     }

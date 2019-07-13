@@ -34,14 +34,17 @@ namespace HackerDetector.AspNetCore
                 var originIP = context.Connection.RemoteIpAddress;
 
                 var block = await _hackerDetector.DetectAndBlockAsync(path.Value, originIP);
-
-
-                if (!block)
+                if (_hackerDetector.Options.ReturnBlockedResponseOnTraps && block == DetectResultEnum.FellInTrap)
+                {
+                    context.Response.StatusCode = (int)HttpStatusCode.NotFound;
+                    await context.Response.WriteAsync("not found");
+                }
+                else if (!block.HasFlag(DetectResultEnum.Blocked))
                     await _next.Invoke(context);
                 else
                 {
                     _logger.LogInformation(string.Format("Blocked: {0} for accessing {1}", originIP.ToString(), path));
-                    if (!_hackerDetector.Options.ReturnBlockedResponse)
+                    if (!_hackerDetector.Options.ReturnBlockedResponseWhenBlocked)
                     {
                         context.Response.StatusCode = (int)HttpStatusCode.NotAcceptable;
                         await context.Response.WriteAsync("blocked");

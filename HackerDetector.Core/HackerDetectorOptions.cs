@@ -33,6 +33,12 @@ namespace HackerDetector
         /// Very useful if there in the pipeline is a error reporting tool (like elmah.io) that should ignore these failed/blocked requests. 
         /// Set to true to stop the pipeline and return a response.
         /// </summary>
-        public bool ReturnBlockedResponse { get; set; } = false;
+        public bool ReturnBlockedResponseWhenBlocked { get; set; } = false;
+
+        /// <summary>
+        /// Very useful if there in the pipeline is a error reporting tool (like elmah.io) that should ignore these failed/blocked requests. 
+        /// Set to true to stop the pipeline and return a response.
+        /// </summary>
+        public bool ReturnBlockedResponseOnTraps { get; set; } = false;
     }
 }
