@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using HackerDetector.Blockers.Cloudflare.Extensions;
+using System;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace HackerDetector.Blockers.Cloudflare
@@ -28,7 +27,7 @@ namespace HackerDetector.Blockers.Cloudflare
             var path = $"/client/v4/zones/{_options.ZoneId}/firewall/access_rules/rules";
             var body = new
             {
-                mode = "js_challenge", //block, challenge, whitelist, js_challenge
+                mode = _options.BlockAction.ToString().ToUnderscoreCase(), 
                 configuration = new
                 {
                     target = "ip",
@@ -46,7 +45,17 @@ namespace HackerDetector.Blockers.Cloudflare
                 client.DefaultRequestHeaders.Add("X-Auth-Key", _options.AuthKey);
 
                 var success = await client.PostAsJsonAsync(path, body);
-                success.EnsureSuccessStatusCode();
+                try
+                {
+                    success.EnsureSuccessStatusCode();
+                }
+                catch (HttpRequestException exception) 
+                {
+                    // Should this throw a new exception? I don't know what the best option is.
+                    exception.Data.Add("Content", await success.Content.ReadAsStringAsync());
+                    exception.Data.Add("ReasonPhrase", success.ReasonPhrase);
+                    throw;
+                }
             }
         }
 

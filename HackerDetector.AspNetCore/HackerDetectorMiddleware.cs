@@ -38,6 +38,7 @@ namespace HackerDetector.AspNetCore
                 {
                     context.Response.StatusCode = (int)HttpStatusCode.NotFound;
                     await context.Response.WriteAsync("not found");
+                    
                 }
                 else if (!block.HasFlag(DetectResultEnum.Blocked))
                     await _next.Invoke(context);
