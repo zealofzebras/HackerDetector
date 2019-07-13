@@ -4,7 +4,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HackerDetector.Cloudflare
+namespace HackerDetector.Blockers.Cloudflare
 {
     public class CloudflareBlocker : HackerDetector.Functions.IHackerBlocker
     {
@@ -40,20 +40,21 @@ namespace HackerDetector.Cloudflare
             using (var client = _httpClientFactory.CreateClient())
             {
 
-
                 client.BaseAddress = new Uri("https://api.cloudflare.com");
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Add("X-Auth-Email", _options.AuthEmail);
                 client.DefaultRequestHeaders.Add("X-Auth-Key", _options.AuthKey);
 
-                await client.PostAsJsonAsync(path, body);
+                var success = await client.PostAsJsonAsync(path, body);
+                success.EnsureSuccessStatusCode();
             }
         }
 
-
+        /*
         public async Task Unblock(DateTime cutoff)
         {
             //https://api.cloudflare.com/client/v4/user/firewall/access_rules/rules?page=1&per_page=20&mode=challenge&configuration.target=ip&configuration.value=198.51.100.4&notes=my note&match=all&order=mode&direction=desc
         }
+        */
     }
 }

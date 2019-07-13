@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace HackerDetector.Cloudflare
+namespace HackerDetector.Blockers.Cloudflare
 {
     public class CloudflareBlockerOptions
     {

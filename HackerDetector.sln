@@ -5,9 +5,11 @@ VisualStudioVersion = 16.0.29020.237
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HackerDetector.Functions", "HackerDetector.Functions\HackerDetector.Functions.csproj", "{28F6A53B-5503-43F0-80DF-F532E070C20E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HackerDetector.AspNetCore", "HackerDetector.AspNetCore\HackerDetector.AspNetCore.csproj", "{DF2A473E-E91D-4FE2-B14E-55473B6E573D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HackerDetector.AspNetCore", "HackerDetector.AspNetCore\HackerDetector.AspNetCore.csproj", "{DF2A473E-E91D-4FE2-B14E-55473B6E573D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HackerDetector.Blockers.Cloudflare", "HackerDetector.Blockers.Cloudflare\HackerDetector.Blockers.Cloudflare.csproj", "{8081B718-AFF6-489E-910D-4FD55D78621A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HackerDetector.Blockers.Cloudflare", "HackerDetector.Blockers.Cloudflare\HackerDetector.Blockers.Cloudflare.csproj", "{8081B718-AFF6-489E-910D-4FD55D78621A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HackerDetector.Core", "HackerDetector.Core\HackerDetector.Core.csproj", "{5BCFE6E7-D32F-4EE1-9404-06C922BA5E70}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{8081B718-AFF6-489E-910D-4FD55D78621A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8081B718-AFF6-489E-910D-4FD55D78621A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8081B718-AFF6-489E-910D-4FD55D78621A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5BCFE6E7-D32F-4EE1-9404-06C922BA5E70}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5BCFE6E7-D32F-4EE1-9404-06C922BA5E70}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5BCFE6E7-D32F-4EE1-9404-06C922BA5E70}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5BCFE6E7-D32F-4EE1-9404-06C922BA5E70}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

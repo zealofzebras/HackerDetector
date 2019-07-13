@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 
-namespace HackerDetector.Cloudflare
+namespace HackerDetector.Blockers.Cloudflare
 {
     public static class ServiceCollectionExtensions
     {

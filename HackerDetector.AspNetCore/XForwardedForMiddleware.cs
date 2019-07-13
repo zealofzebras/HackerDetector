@@ -5,7 +5,7 @@ using System.Globalization;
 using System.Net;
 using System.Threading.Tasks;
 
-namespace HackerDetector
+namespace HackerDetector.AspNetCore
 {
 
     public class XForwardedForMiddleware
