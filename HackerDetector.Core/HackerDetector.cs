@@ -88,11 +88,17 @@ namespace HackerDetector
             if (_options.HammerCheckAllPaths || (_options.HammerPaths?.Contains(path)).GetValueOrDefault())
             {
                 if (!hammerCache.TryGetValue(originIP, out var cached))
+                {
                     cached = new Collections.FixedSizedQueue<DateTime>(_options.HammerMaxHitsInASecond);
+                    hammerCache.Add(originIP, cached);
+                }
 
                 cached.Enqueue(DateTime.Now);
+                var span = cached.First() - cached.Last();
 
-                if ((cached.First() - cached.Last()).TotalSeconds < 1)
+                Console.WriteLine(cached.Count + " : " + span.TotalMilliseconds + " (" + span.TotalSeconds + ")");
+
+                if (cached.Count == Options.HammerMaxHitsInASecond && span.TotalMilliseconds < 1000)
                     return DetectResultEnum.HammeredPathAndBlocked;
             }
 

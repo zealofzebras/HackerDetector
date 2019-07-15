@@ -15,7 +15,8 @@ namespace HackerDetector
 
         public List<string> Traps { get; set; } = new List<string>
         {
-            "/wp-login.php"
+            "/wp-login.php",
+            "/xmlrpc.php"
         };
 
         public List<string> HammerPaths { get; set; } = new List<string>
