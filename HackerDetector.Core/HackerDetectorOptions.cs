@@ -15,8 +15,15 @@ namespace HackerDetector
 
         public List<string> Traps { get; set; } = new List<string>
         {
+            // Wordpress known urls
+            "/wordpress",
+            "/wp",
+            "/wp-admin",
             "/wp-login.php",
-            "/xmlrpc.php"
+            "/xmlrpc.php",
+            // Normal admin paths
+            "/admin",
+            "/administrator/index.php"
         };
 
         public List<string> HammerPaths { get; set; } = new List<string>
